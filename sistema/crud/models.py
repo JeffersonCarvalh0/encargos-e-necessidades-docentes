@@ -11,95 +11,109 @@ class Campus(models.Model):
     '''
     name = models.CharField(max_length = 255)
     short_name = models.CharField(max_length = 10)
-    telephone1 = models.IntegerField()
-    telephone1 = models.IntegerField()
+    addr_street = models.CharField(max_length = 100)
+    addr_no = models.CharField(max_length = 5)
+    addr_neighbor = models.CharField(max_length = 100)
+    addr_city = models.CharField(max_length = 100)
+    addr_uf = models.CharField(max_length = 50)
+    addr_zip = models.CharField(max_length = 10)
+    phone1 = models.IntegerField()
+    phone2 = models.IntegerField()
     email = models.EmailField()
     site = models.URLField()
     active = mdoels.BooleanField()
-    address = models.ForeignKey('Address', on_delete=models.PROTECT, null = True)
 
-class Address(models.Model):
+class Teacher(models.Model):
     '''
-        Address model
+        Teacher of a campus
     '''
-    public_area = models.CharField(max_length = 255)
-    number = models.CharField(max_length = 10)
-    neighborhood = models.CharField(max_length = 255)
-    municipality = models.CharField(max_length = 255)
-    state = models.CharField(max_length = 30)
-    postal_code = models.CharField(max_length = 10)
-
-class Professor(models.Model):
-    '''
-        Professor of a campus
-    '''
+    cpf = models.CharField(max_length = 11)
     name = models.CharField(max_length = 255)
+    email = models.EmailField()
+    phone1 = models.IntegerField()
+    phone2 = models.IntegerField()
     active = models.BooleanField()
-    regular = models.BooleanField() # Efetivo
-    exclusive = models.BooleanField() # Dedicação exclusiva
-    employment_bond = models.ForeignKey('EmploymentBond', on_delete=models.PROTECT, null = True)
+    effective = models.BooleanField()
+    active = models.BooleanField()
+    contract_term = models.DateField()
+    area = models.ManyToManyField(Area)
     title = models.ForeignKey('Title', on_delete=models.PROTECT, null = True)
-    knowledge_area = models.ManyToManyField(KnowledgeArea)
     course = models.ForeignKey('Course', on_delete=models.PROTECT, null = True)
-    campus = models.ForeignKey('Campus', on_delete=models.PROTECT, null = True)
     contract = models.ForeignKey('Contract', on_delete=models.PROTECT, null = True)
-
-class EmplymentBond(models.Model):
-    workload = models.SmallIntegerField()
-
-class Title(models.Model):
-    name = models.CharField(max_length = 100)
-
-class KnowledgeArea(models.Model):
-    name = models.CharField(100)
-
-class Contract(models.Model):
-    beginning = models.DateField()
-    end = models.DateField()
-
-class Assignment(models.Model):
-    '''
-        Professors' current commitments
-    '''
-    professor = models.ForeignKey('Professor', on_delete=models.PROTECT, null = True)
-    discipline = models.ForeignKey('Discipline', on_delete=models.PROTECT, null = True)
-    period = models.ForeignKey('Period', on_delete=models.PROTECT, null = True)
-
-class Period(models.Model):
-    description = models.TextField()
-    beginning = models.DateField()
-    end = models.DateField()
 
 class Course(models.Model):
     '''
-        Course of a campus
+    Course of a campus
     '''
-    code = models.IntegerField(primary_key = True)
     name = models.CharField(max_length = 255)
     short_name = models.CharField(max_length = 30)
-    coordinator = models.ForeignKey('Professor', on_delete=models.PROTECT, null = True)
-    course_curriculum = models.ForeignKey('CourseCurriculum', on_delete=models.PROTECT, null = True)
     campus = models.ForeignKey('Campus', on_delete = models.PROTECT, null = True)
 
 class Discipline(models.Model):
     '''
-        Discipline of a course
+    Discipline of a course
     '''
-    code = models.IntegerField(primary_key = True)
     name = models.CharField(max_length = 255)
     short_name = models.CharField(max_lenth = 255)
-    summary = models.TextField() # Ementa
-    workload = models.SmallIntegerField()
+    ementa = models.TextField() # Ementa
     block = models.SmallIntegerField()
-    professor = models.ForeignKey('Professor', on_delete=models.PROTECT, null = True)
-    course = models.ForeignKey('Course', on_delete=models.PROTECT, null = True)
-    course_curriculum = models.ForeignKey('CourseCurriculum', on_delete=models.PROTECT, null = True)
-
-class CourseCurriculum(models.Model):
-    '''
-        Course curriculum of a course
-    '''
-    code = models.IntegerField(primary_key = True)
+    workload = models.SmallIntegerField()
     active = models.BooleanField()
-    starting_period = models.ForeignKey('Period', on_delete=models.PROTECT, null = True)
-    ending_period = models.ForeignKey('Period', on_delete=models.PROTECT, null = True)
+    area = models.ForeignKey('Area', on_delete=models.PROTECT, null = True)
+    course_grid = models.ForeignKey('CourseGrid', on_delete=models.PROTECT, null = True)
+
+class CourseGrid(models.Model):
+    '''
+    Course curriculum of a course
+    '''
+    active = models.BooleanField()
+    course = models.ForeignKey('Course', on_delete=models.PROTECT, null = True)
+    date_ini = models.DateField()
+    date_term = models.DateField()
+    active = models.BooleanField()
+
+class Activity(models.Model):
+    teacher = models.ForeignKey('Teacher', on_delete=models.PROTECT, null = True)
+    actv_type = models.ForeignKey('ActivityType', on_delete=models.PROTECT, null = True)
+    quantity = models.IntegerField()
+    date_ini = models.DateField()
+    date_term = models.DateField()
+    comment = models.TextField()
+
+class ActivityType(models.Model):
+    name = models.CharField(max_length = 255)
+    wl_week = models.SmallIntegerField()
+    wl_max = models.SmallIntegerField()
+    # type
+    comment = models.TextField()
+    active = models.BooleanField()
+
+class Title(models.Model):
+    name = models.CharField(max_length = 100)
+
+class Area(models.Model):
+    name = models.CharField(100)
+
+class ContractType(models.Model):
+    name = models.CharField(max_length = 255)
+    wl_teaching = models.SmallIntegerField()
+    wl_extres = models.SmallIntegerField()
+    active = models.BooleanField()
+
+# class Assignment(models.Model):
+#     '''
+#         Professors' current commitments
+#     '''
+#     professor = models.ForeignKey('Professor', on_delete=models.PROTECT, null = True)
+#     discipline = models.ForeignKey('Discipline', on_delete=models.PROTECT, null = True)
+#     period = models.ForeignKey('Period', on_delete=models.PROTECT, null = True)
+#
+# class Period(models.Model):
+#     description = models.TextField()
+#     beginning = models.DateField()
+#     end = models.DateField()
+
+
+# class SysUser(auth.User):
+#     campus = models.ForeignKey('Campus', on_delete=models.PROTECT, null = none)
+#     user = models.OneToOneField(auth.User)
