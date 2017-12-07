@@ -34,7 +34,6 @@ class Teacher(models.Model):
     phone2 = models.IntegerField()
     active = models.BooleanField()
     effective = models.BooleanField()
-    active = models.BooleanField()
     contract_term = models.DateField()
     area = models.ManyToManyField(Area)
     title = models.ForeignKey('Title', on_delete=models.PROTECT, null = True)
@@ -47,6 +46,7 @@ class Course(models.Model):
     '''
     name = models.CharField(max_length = 255)
     short_name = models.CharField(max_length = 30)
+    active = models.BooleanField
     campus = models.ForeignKey('Campus', on_delete = models.PROTECT, null = True)
 
 class Discipline(models.Model):
@@ -84,7 +84,7 @@ class ActivityType(models.Model):
     name = models.CharField(max_length = 255)
     wl_week = models.SmallIntegerField()
     wl_max = models.SmallIntegerField()
-    # type
+    actv_type = models.SmallIntegerField()
     comment = models.TextField()
     active = models.BooleanField()
 
