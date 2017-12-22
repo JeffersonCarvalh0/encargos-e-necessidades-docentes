@@ -21,24 +21,27 @@ class Campus(models.Model):
     phone2 = models.IntegerField()
     email = models.EmailField()
     site = models.URLField()
-    active = mdoels.BooleanField()
+    active = models.BooleanField()
+
+class Area(models.Model):
+    name = models.CharField(max_length = 100)
 
 class Teacher(models.Model):
     '''
         Teacher of a campus
     '''
     cpf = models.CharField(max_length = 11)
-    name = models.CharField(max_length = 255)
-    email = models.EmailField()
-    phone1 = models.IntegerField()
-    phone2 = models.IntegerField()
-    active = models.BooleanField()
-    effective = models.BooleanField()
+    name = models.CharField(max_length = 255) #
+    email = models.EmailField() #
+    phone1 = models.IntegerField() #
+    phone2 = models.IntegerField() #
+    active = models.BooleanField() #
+    effective = models.BooleanField() #
     contract_term = models.DateField()
-    area = models.ManyToManyField(Area)
-    title = models.ForeignKey('Title', on_delete=models.PROTECT, null = True)
-    course = models.ForeignKey('Course', on_delete=models.PROTECT, null = True)
-    contract = models.ForeignKey('Contract', on_delete=models.PROTECT, null = True)
+    area = models.ManyToManyField(Area) #
+    title = models.ForeignKey('Title', on_delete=models.PROTECT, null = True) #
+    course = models.ForeignKey('Course', on_delete=models.PROTECT, null = True) #
+    contractType = models.ForeignKey('ContractType', on_delete=models.PROTECT, null = True) #
 
 class Course(models.Model):
     '''
@@ -46,16 +49,17 @@ class Course(models.Model):
     '''
     name = models.CharField(max_length = 255)
     short_name = models.CharField(max_length = 30)
-    active = models.BooleanField
+    active = models.BooleanField()
     campus = models.ForeignKey('Campus', on_delete = models.PROTECT, null = True)
+    coordinator = models.ForeignKey('Teacher', on_delete = models.PROTECT, null = True, related_name = '+')
 
 class Discipline(models.Model):
     '''
     Discipline of a course
     '''
     name = models.CharField(max_length = 255)
-    short_name = models.CharField(max_lenth = 255)
-    ementa = models.TextField() # Ementa
+    short_name = models.CharField(max_length = 255)
+    ementa = models.TextField()
     block = models.SmallIntegerField()
     workload = models.SmallIntegerField()
     active = models.BooleanField()
@@ -66,11 +70,11 @@ class CourseGrid(models.Model):
     '''
     Course curriculum of a course
     '''
+    name = models.CharField(max_length = 255)
     active = models.BooleanField()
-    course = models.ForeignKey('Course', on_delete=models.PROTECT, null = True)
     date_ini = models.DateField()
     date_term = models.DateField()
-    active = models.BooleanField()
+    course = models.ForeignKey('Course', on_delete=models.PROTECT, null = True)
 
 class Activity(models.Model):
     teacher = models.ForeignKey('Teacher', on_delete=models.PROTECT, null = True)
@@ -91,13 +95,12 @@ class ActivityType(models.Model):
 class Title(models.Model):
     name = models.CharField(max_length = 100)
 
-class Area(models.Model):
-    name = models.CharField(100)
-
 class ContractType(models.Model):
     name = models.CharField(max_length = 255)
+    description = models.TextField()
     wl_teaching = models.SmallIntegerField()
     wl_extres = models.SmallIntegerField()
+    wl_complActv = models.SmallIntegerField()
     active = models.BooleanField()
 
 # class Assignment(models.Model):
