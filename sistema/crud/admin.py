@@ -4,6 +4,7 @@ from django.contrib import admin
 from crud.models import (
     CourseGrid,
     Activity,
+    ActivityType,
     Title,
     ContractType,
     Campus,
@@ -15,6 +16,7 @@ from crud.models import (
 
 admin.site.register(CourseGrid)
 admin.site.register(Activity)
+admin.site.register(ActivityType)
 admin.site.register(Title)
 admin.site.register(ContractType)
 admin.site.register(Campus)
