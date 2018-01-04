@@ -1,18 +1,17 @@
 # ENCARGOS E NECESSIDADES DOCENTES
 
 # Objetivo Geral:
-    - Dada uma oferta, cujas disciplinas vem de uma matriz curricular
+    - Um coordenador ter o controle de cursos, disciplinas e ofertas.
 
-Professores
-Vinculos empregatícios
-Matriz curricular de cada curso
-Cadastro Cursos
-Disciplinas
-Interface do coordenador para produzir a ofertas
-Interface do coordenador para vincular à disciplina
-Contabilizar carga horária
-Emitir relatório de cada carga horária
-Professor pode eventualmente passar da carga horária
+# Casos de uso:
+    -Controle dos Professores cadastrados
+    -Controle dos Vinculos empregatícios
+    -Conter a matriz curricular de cada curso
+    -Controle dos Cursos
+    -Controle das Disciplinas dos Cursos
+    -Produzir Ofertas para os Cursos
+    -Contabilizar cargas horárias
+    -Emitir relatório de cada carga horária
 
 # Competências:
     - Engenharia de Software/Banco de Dados (UML – Casos de uso e Classes)
