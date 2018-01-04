@@ -1,16 +1,26 @@
 # ENCARGOS E NECESSIDADES DOCENTES
 
 ### Objetivo Geral:
-    Um coordenador ter o controle de cursos, disciplinas e ofertas.
+    Ter o controle de cursos, disciplinas, ofertas, encargos e necessidades docentes. O acesso deve 
+    ser feito somente por coordenadores, diretores ou pela parte adiministrativa de um Campus.
 
 ### Casos de uso:
+    - Controle de usuários
+        Cada usuário só pode se logar em um campus.
     - Controle dos Professores cadastrados
+        Cada professor está alocado em um único curso.
+        Cada professor atua em uma ou mais Areas.
+        Quem cadastra os professores sao usuários da administraçao ou RH.
     - Controle dos Vinculos empregatícios
-    - Conter a matriz curricular de cada curso
+    - Controle da Matriz Curricular de cada curso
     - Controle dos Cursos
+    - Controle de Areas
     - Controle das Disciplinas dos Cursos
+        uma Disciplina pode conter uma ou mais Areas.
     - Produzir Ofertas para os Cursos
+        O coordenador terá a opçao de definir ofertas.
     - Contabilizar cargas horárias
+        Sinalizar se a carga horária está baixa, normal ou alta.
     - Emitir relatório de cada carga horária
 
 ### Competências:
