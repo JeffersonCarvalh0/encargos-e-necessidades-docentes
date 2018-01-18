@@ -249,4 +249,4 @@ class Enrollment(models.Model):
 
     class Meta:
         verbose_name = 'Encargo'
-        verbose_name_plural = "Engargos"
+        verbose_name_plural = "Encargos"
