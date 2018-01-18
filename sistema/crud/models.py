@@ -22,7 +22,7 @@ class Campus(models.Model):
     active = models.BooleanField('ativo')
 
     def __unicode__(self):
-        return self.short_nome
+        return self.short_name
 
     class Meta:
         verbose_name_plural = "Campus"
@@ -37,7 +37,7 @@ class Course(models.Model):
     active = models.BooleanField('ativo')
 
     def __unicode__(self):
-        return self.nome
+        return self.name
 
     class Meta:
         verbose_name = 'curso'
@@ -54,7 +54,7 @@ class CourseGrid(models.Model):
     active = models.BooleanField('ativo')
 
     def __unicode__(self):
-        return self.nome
+        return self.name
 
     class Meta:
         verbose_name = 'Matriz curricular'
@@ -117,7 +117,7 @@ class ContractType(models.Model):
     active = models.BooleanField('ativo')
 
     def __unicode__(self):
-        return self.nome
+        return self.name
 
     class Meta:
         verbose_name = 'Tipo de contrato'
@@ -130,7 +130,7 @@ class ActivityNature(models.Model):
     name = models.CharField('nome', max_length=50)
 
     def __unicode__(self):
-        return self.nome
+        return self.name
 
     class Meta:
         verbose_name = 'Natureza da atividade'
@@ -146,7 +146,7 @@ class ActivityType(models.Model):
     nature = models.ForeignKey(ActivityNature, verbose_name='natureza')
 
     def __unicode__(self):
-        return self.nome
+        return self.name
 
     class Meta:
         verbose_name = 'Tipo de atividade'
@@ -188,7 +188,7 @@ class Activity(models.Model):
     observations = models.TextField('observações')
     def __unicode__(self):
 
-        return self.nome
+        return self.teacher
 
     class Meta:
         verbose_name = 'Atividade'
@@ -230,7 +230,7 @@ class Offer(models.Model):
     date_term = models.DateField('data final')
 
     def __unicode__(self):
-        return self.nome
+        return self.name
 
     class Meta:
         verbose_name = 'Oferta'
@@ -245,7 +245,7 @@ class Enrollment(models.Model):
     teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
 
     def __unicode__(self):
-        return self.nome
+        return self.name
 
     class Meta:
         verbose_name = 'Encargo'
