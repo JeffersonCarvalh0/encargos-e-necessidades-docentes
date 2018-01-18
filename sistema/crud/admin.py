@@ -38,7 +38,6 @@ class TitleAdmin(admin.ModelAdmin):
     list_display = ('name',)
     
 class ContractTypeAdmin(admin.ModelAdmin):
-    ordering = ('name',)
     list_display = ('name',)
     
 class ActivityNatureAdmin(admin.ModelAdmin):
