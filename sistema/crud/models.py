@@ -10,7 +10,7 @@ class Campus(models.Model):
     name = models.CharField('nome', max_length=50)
     short_name = models.CharField('nome curto', max_length=30)
     add_street = models.CharField('rua', max_length=50)
-    add_no = models.IntegerField('número')
+    add_no = models.IntegerField('numero')
     add_neighbor = models.CharField('bairro', max_length=50)
     add_city = models.CharField('cidade', max_length=50)
     add_uf = models.CharField('estado', max_length=2)
@@ -38,6 +38,7 @@ class Course(models.Model):
 
     def __unicode__(self):
         return self.nome
+
     class Meta:
         verbose_name = 'curso'
         verbose_name_plural = "cursos"
@@ -47,7 +48,7 @@ class Course(models.Model):
 #
 class CourseGrid(models.Model):
     name = models.CharField('nome', max_length=50)
-    course = models.ForeignKey('curso', Course)
+    course = models.ForeignKey(Course)
     date_ini = models.DateField('data início', null=True)
     date_term = models.DateField('data término', null=True)
     active = models.BooleanField('ativo')
@@ -56,8 +57,8 @@ class CourseGrid(models.Model):
         return self.nome
 
     class Meta:
-        verbose_name = 'Grade curricular'
-        verbose_name_plural = "Grades curriculares"
+        verbose_name = 'Matriz curricular'
+        verbose_name_plural = "Matrizes curriculares"
 
 #
 # Area
@@ -78,8 +79,8 @@ class Area(models.Model):
 class Discipline(models.Model):
     name = models.CharField('nome', max_length=50)
     short_name = models.CharField('nome curto', max_length=20)
-    grid = models.ForeignKey('grade curricular', CourseGrid)
-    area = models.ForeignKey('área', Area)
+    grid = models.ForeignKey(CourseGrid)
+    area = models.ForeignKey(Area)
     ementa = models.TextField()
     block = models.SmallIntegerField('bloco')
     work_load = models.SmallIntegerField('carga horária')
@@ -132,7 +133,7 @@ class ActivityNature(models.Model):
         return self.nome
 
     class Meta:
-        verbose_name: 'Natureza da atividade'
+        verbose_name = 'Natureza da atividade'
         verbose_name_plural = "Naturezas de atividades"
 
 #
@@ -142,7 +143,7 @@ class ActivityType(models.Model):
     name = models.CharField('nome', max_length=50)
     wk_week = models.IntegerField('carga horária semanal')
     wk_limit = models.IntegerField('carga horária limite')
-    nature = models.ForeignKey('natureza', ActivityNature)
+    nature = models.ForeignKey(ActivityNature)
 
     def __unicode__(self):
         return self.nome
@@ -157,10 +158,10 @@ class ActivityType(models.Model):
 #
 class Teacher(models.Model):
     name = models.CharField('nome', max_length=80)
-    course = models.ForeignKey('curso', Course)
-    title = models.ForeignKey('títulação', Title)
-    area = models.ManyToManyField('área', Area)
-    contract_type = models.ForeignKey('tipo de contrato', ContractType)
+    course = models.ForeignKey(Course)
+    title = models.ForeignKey(Title)
+    area = models.ManyToManyField(Area)
+    contract_type = models.ForeignKey(ContractType)
     phone1 = models.CharField('telefone 1', max_length=14)
     phone2 = models.CharField('telefone 2', max_length=14)
     email = models.EmailField('e-mail')
@@ -179,8 +180,8 @@ class Teacher(models.Model):
 # Atividade
 #
 class Activity(models.Model):
-    teacher = models.ForeignKey('professor(a)', Teacher)
-    act_type = models.ForeignKey('tipo de atividade', ActivityType)
+    teacher = models.ForeignKey(Teacher)
+    act_type = models.ForeignKey(ActivityType)
     quantity = models.IntegerField('quantidade')
     date_ini = models.DateField('data inicial')
     date_term = models.DateField('data final')
@@ -210,25 +211,30 @@ class User(models.Model):
 # Periodo
 #
 class Semester(models.Model):
-    name = models.CharField(max_length=50)
-    date_ini = models.DateField()
-    date_term = models.DateField()
+    name = models.CharField('nome', max_length=50)
+    date_ini = models.DateField('data inicial')
+    date_term = models.DateField('data final')
+
+    class Meta:
+        verbose_name = 'Período'
+        verbose_name_plural = 'Períodos'
 
 #
 # Oferta
 #
 class Offer(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField('nome', max_length=50)
     semester = models.ForeignKey(Semester)
     course = models.ForeignKey(Course)
-    date_ini = models.DateField()
-    date_term = models.DateField()
+    date_ini = models.DateField('data inicial')
+    date_term = models.DateField('data final')
 
     def __unicode__(self):
         return self.nome
 
     class Meta:
-        verbose_name_plural = "Offers"
+        verbose_name = 'Oferta'
+        verbose_name_plural = "Ofertas"
 
 #
 # Encargo
@@ -240,5 +246,7 @@ class Enrollment(models.Model):
 
     def __unicode__(self):
         return self.nome
+
     class Meta:
-        verbose_name_plural = "Enrolments"
+        verbose_name = 'Encargo'
+        verbose_name_plural = "Engargos"
