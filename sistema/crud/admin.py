@@ -2,26 +2,79 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 from crud.models import (
+    Campus,
+    Course,
     CourseGrid,
-    Activity,
-    ActivityType,
+    Area,
+    Discipline,
     Title,
     ContractType,
-    Campus,
-    Area,
+    ActivityNature,
+    ActivityType,
     Teacher,
-    Course,
-    Discipline,
+    Activity,
+    Semester,
+    Offer,
+    Enrollment,
 )
 
-admin.site.register(CourseGrid)
-admin.site.register(Activity)
-admin.site.register(ActivityType)
-admin.site.register(Title)
-admin.site.register(ContractType)
-admin.site.register(Campus)
-admin.site.register(Area)
-admin.site.register(Teacher)
-admin.site.register(Course)
-admin.site.register(Discipline)
+class CampusAdmin(admin.ModelAdmin):
+    ordering = ('name',)
+    list_display = ('name', 'add_city', 'phone1', 'email')
+
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+class CourseGridAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class AreaAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class DisciplineAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class TitleAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class ContractTypeAdmin(admin.ModelAdmin):
+    ordering = ('name',)
+    list_display = ('wk_resext',)
+    
+class ActivityNatureAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class ActivityTypeAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class ActivityAdmin(admin.ModelAdmin):
+    list_display = ('teacher',)
+    
+class SemesterAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+class EnrollmentAdmin(admin.ModelAdmin):
+    list_display = ('offer',)
+    
+
+admin.site.register(Campus,CampusAdmin)
+admin.site.register(Course,CourseAdmin)
+admin.site.register(CourseGrid,CourseGridAdmin)
+admin.site.register(Area,AreaAdmin)
+admin.site.register(Discipline,DisciplineAdmin)
+admin.site.register(Title,TitleAdmin)
+admin.site.register(ContractType,ContractTypeAdmin)
+admin.site.register(ActivityNature,ActivityNatureAdmin)
+admin.site.register(ActivityType,ActivityTypeAdmin)
+admin.site.register(Teacher,TeacherAdmin)
+admin.site.register(Activity,ActivityAdmin)
+admin.site.register(Semester,SemesterAdmin)
+admin.site.register(Offer,OfferAdmin)
+admin.site.register(Enrollment,EnrollmentAdmin)
 
