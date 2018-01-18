@@ -16,10 +16,10 @@ class Campus(models.Model):
     add_uf = models.CharField('estado', max_length=2)
     add_zip = models.CharField('CEP', max_length=50)
     phone1 = models.CharField('telefone 1', max_length=14)
-    phone2 = models.CharField('telefone 2', max_length=14)
+    phone2 = models.CharField('telefone 2', max_length=14, null=True)
     email = models.EmailField('e-mail')
     site = models.URLField()
-    active = models.BooleanField('ativo')
+    active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
         return self.short_name
@@ -34,10 +34,10 @@ class Course(models.Model):
     name = models.CharField('nome', max_length=50)
     short_name = models.CharField('nome curto', max_length=20)
     campus = models.ForeignKey(Campus)
-    active = models.BooleanField('ativo')
+    active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
-        return self.name
+        return self.short_name
 
     class Meta:
         verbose_name = 'curso'
@@ -51,7 +51,7 @@ class CourseGrid(models.Model):
     course = models.ForeignKey(Course, verbose_name='curso')
     date_ini = models.DateField('data início', null=True)
     date_term = models.DateField('data término', null=True)
-    active = models.BooleanField('ativo')
+    active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
         return self.name
@@ -114,7 +114,7 @@ class ContractType(models.Model):
     wk_teaching = models.IntegerField('carga horária de ensino')
     wk_resext = models.IntegerField('carga horária de extensão')
     wk_compl = models.IntegerField('carga horária complementar')
-    active = models.BooleanField('ativo')
+    active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
         return self.name
@@ -163,10 +163,10 @@ class Teacher(models.Model):
     area = models.ManyToManyField(Area, verbose_name='área')
     contract_type = models.ForeignKey(ContractType, verbose_name='tipo de contrato')
     phone1 = models.CharField('telefone 1', max_length=14)
-    phone2 = models.CharField('telefone 2', max_length=14)
+    phone2 = models.CharField('telefone 2', max_length=14, null=True)
     email = models.EmailField('e-mail')
-    active = models.BooleanField('ativo')
-    efetivo = models.BooleanField()
+    active = models.BooleanField('ativo', default=True)
+    efetivo = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.name
@@ -185,9 +185,9 @@ class Activity(models.Model):
     quantity = models.IntegerField('quantidade')
     date_ini = models.DateField('data inicial')
     date_term = models.DateField('data final')
-    observations = models.TextField('observações')
-    def __unicode__(self):
+    observations = models.TextField('observações', null=True)
 
+    def __unicode__(self):
         return self.teacher
 
     class Meta:
