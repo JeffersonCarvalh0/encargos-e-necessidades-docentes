@@ -48,7 +48,7 @@ class Course(models.Model):
 #
 class CourseGrid(models.Model):
     name = models.CharField('nome', max_length=50)
-    course = models.ForeignKey(Course)
+    course = models.ForeignKey(Course, verbose_name='curso')
     date_ini = models.DateField('data início', null=True)
     date_term = models.DateField('data término', null=True)
     active = models.BooleanField('ativo')
@@ -79,8 +79,8 @@ class Area(models.Model):
 class Discipline(models.Model):
     name = models.CharField('nome', max_length=50)
     short_name = models.CharField('nome curto', max_length=20)
-    grid = models.ForeignKey(CourseGrid)
-    area = models.ForeignKey(Area)
+    grid = models.ForeignKey(CourseGrid, verbose_name='matriz curricular')
+    area = models.ForeignKey(Area, verbose_name='área')
     ementa = models.TextField()
     block = models.SmallIntegerField('bloco')
     work_load = models.SmallIntegerField('carga horária')
@@ -143,7 +143,7 @@ class ActivityType(models.Model):
     name = models.CharField('nome', max_length=50)
     wk_week = models.IntegerField('carga horária semanal')
     wk_limit = models.IntegerField('carga horária limite')
-    nature = models.ForeignKey(ActivityNature)
+    nature = models.ForeignKey(ActivityNature, verbose_name='natureza')
 
     def __unicode__(self):
         return self.nome
@@ -158,10 +158,10 @@ class ActivityType(models.Model):
 #
 class Teacher(models.Model):
     name = models.CharField('nome', max_length=80)
-    course = models.ForeignKey(Course)
-    title = models.ForeignKey(Title)
-    area = models.ManyToManyField(Area)
-    contract_type = models.ForeignKey(ContractType)
+    course = models.ForeignKey(Course, verbose_name='curso')
+    title = models.ForeignKey(Title, verbose_name='titulação')
+    area = models.ManyToManyField(Area, verbose_name='área')
+    contract_type = models.ForeignKey(ContractType, verbose_name='tipo de contrato')
     phone1 = models.CharField('telefone 1', max_length=14)
     phone2 = models.CharField('telefone 2', max_length=14)
     email = models.EmailField('e-mail')
@@ -180,14 +180,14 @@ class Teacher(models.Model):
 # Atividade
 #
 class Activity(models.Model):
-    teacher = models.ForeignKey(Teacher)
-    act_type = models.ForeignKey(ActivityType)
+    teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
+    act_type = models.ForeignKey(ActivityType, verbose_name='tipo de atividade')
     quantity = models.IntegerField('quantidade')
     date_ini = models.DateField('data inicial')
     date_term = models.DateField('data final')
     observations = models.TextField('observações')
-
     def __unicode__(self):
+
         return self.nome
 
     class Meta:
@@ -224,8 +224,8 @@ class Semester(models.Model):
 #
 class Offer(models.Model):
     name = models.CharField('nome', max_length=50)
-    semester = models.ForeignKey(Semester)
-    course = models.ForeignKey(Course)
+    semester = models.ForeignKey(Semester, verbose_name='período')
+    course = models.ForeignKey(Course, verbose_name='curso')
     date_ini = models.DateField('data inicial')
     date_term = models.DateField('data final')
 
@@ -240,9 +240,9 @@ class Offer(models.Model):
 # Encargo
 #
 class Enrollment(models.Model):
-    offer = models.ForeignKey(Offer)
-    discipline = models.ForeignKey(Discipline)
-    teacher = models.ForeignKey(Teacher)
+    offer = models.ForeignKey(Offer, verbose_name='oferta')
+    discipline = models.ForeignKey(Discipline, verbose_name='disciplina')
+    teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
 
     def __unicode__(self):
         return self.nome
