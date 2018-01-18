@@ -39,7 +39,7 @@ class TitleAdmin(admin.ModelAdmin):
     
 class ContractTypeAdmin(admin.ModelAdmin):
     ordering = ('name',)
-    list_display = ('wk_resext',)
+    list_display = ('name',)
     
 class ActivityNatureAdmin(admin.ModelAdmin):
     list_display = ('name',)
