@@ -34,11 +34,11 @@
     - George      -   georgelima11@hotmail.com
     - Honorato    -   vishnora@hotmail.com
     - Jefferson   -   jeffersonhcarvalho@gmail.com
-    - Germano -   germanomgomes@hotmail.com
+    - Germano     -   germanomgomes@hotmail.com
     - Jean        -   otirbnaej@hotmail.com
     - Luiz        -   luizrodrigo46@hotmail.com
     - Athyrson    -   athyrsonmr@gmail.com
-    - Herbson -   hbscjk@gmail.com
-    - Jordano -   jordanolb95@hotmail.com
-    - Augusto -   augustocalaca2@gmail.com
+    - Herbson     -   hbscjk@gmail.com
+    - Jordano     -   jordanolb95@hotmail.com
+    - Augusto     -   augustocalaca2@gmail.com
     - Assis       -   netodamasceno12@gmail.com   
