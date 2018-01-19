@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.contrib import admin
+from django.contrib.admin import AdminSite
 from crud.models import (
     Campus,
     Course,
@@ -18,10 +19,15 @@ from crud.models import (
     Enrollment,
 )
 
+AdminSite.site_header = 'Controle de Encargos Docentes'
+AdminSite.index_title = 'UESPI'
+AdminSite.site_title = 'Controle de Encargos Docentes'
+AdminSite.site_url = None
+
 @admin.register(Campus)
 class CampusAdmin(admin.ModelAdmin):
     ordering = ('name',)
-    list_display = ('name', 'short_name', 'add_city', 'phone1', 'email', 'active', )
+    list_display = ('short_name', 'add_city', 'phone1', 'email', 'active', )
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -37,7 +43,7 @@ class AreaAdmin(admin.ModelAdmin):
 
 @admin.register(Discipline)
 class DisciplineAdmin(admin.ModelAdmin):
-    list_display = ('name', 'short_name', 'grid', 'area', 'ementa', 'block', 'work_load',)
+    list_display = ('short_name', 'grid', 'area', 'block', 'work_load',)
 
 @admin.register(Title)
 class TitleAdmin(admin.ModelAdmin):
@@ -57,11 +63,11 @@ class ActivityTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('name', 'course', 'title', 'contract_type', 'phone1', 'phone2', 'email', 'active', 'efetivo',)
+    list_display = ('name', 'course', 'title', 'active', 'efetivo',)
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('teacher', 'act_type', 'quantity', 'date_ini', 'date_term', 'observations',)
+    list_display = ('teacher', 'act_type', 'date_ini', 'date_term',)
 
 @admin.register(Semester)
 class SemesterAdmin(admin.ModelAdmin):
