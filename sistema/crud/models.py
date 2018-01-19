@@ -165,9 +165,9 @@ class Teacher(models.Model):
     phone1 = models.CharField('telefone 1', max_length=14)
     phone2 = models.CharField('telefone 2', max_length=14, null=True)
     email = models.EmailField('e-mail')
-    active = models.BooleanField('ativo', default=True)
     efetivo = models.BooleanField(default=True)
     activity = models.ManyToManyField(Activity, verbose_name='atividade')
+    active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
         return self.name

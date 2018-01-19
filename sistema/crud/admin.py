@@ -63,11 +63,11 @@ class ActivityTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('name', 'course', 'title', 'active', 'efetivo',)
+    list_display = ('name', 'course', 'title', 'efetivo', 'active')
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('teacher', 'act_type', 'date_ini', 'date_term',)
+    list_display = ('act_type', 'date_ini', 'date_term',)
 
 @admin.register(Semester)
 class SemesterAdmin(admin.ModelAdmin):
