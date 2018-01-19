@@ -152,6 +152,23 @@ class ActivityType(models.Model):
         verbose_name = 'Tipo de atividade'
         verbose_name_plural = "Tipos de atividades"
 
+#
+# Atividade
+#
+class Activity(models.Model):
+    # teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
+    act_type = models.ForeignKey(ActivityType, verbose_name='tipo de atividade')
+    quantity = models.IntegerField('quantidade')
+    date_ini = models.DateField('data inicial')
+    date_term = models.DateField('data final')
+    observations = models.TextField('observações', null=True)
+
+    def __unicode__(self):
+        return self.teacher
+
+    class Meta:
+        verbose_name = 'Atividade'
+        verbose_name_plural = "Atividades"
 
 #
 # Professor
@@ -177,23 +194,6 @@ class Teacher(models.Model):
         verbose_name_plural = "Professores"
 
 
-#
-# Atividade
-#
-class Activity(models.Model):
-    # teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
-    act_type = models.ForeignKey(ActivityType, verbose_name='tipo de atividade')
-    quantity = models.IntegerField('quantidade')
-    date_ini = models.DateField('data inicial')
-    date_term = models.DateField('data final')
-    observations = models.TextField('observações', null=True)
-
-    def __unicode__(self):
-        return self.teacher
-
-    class Meta:
-        verbose_name = 'Atividade'
-        verbose_name_plural = "Atividades"
 
 """
 class User(models.Model):
