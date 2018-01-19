@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals
 from django.db import models
+from django.utils.timezone import now
 
 #
 # Campus
@@ -49,8 +50,8 @@ class Course(models.Model):
 class CourseGrid(models.Model):
     name = models.CharField('nome', max_length=50)
     course = models.ForeignKey(Course, verbose_name='curso')
-    date_ini = models.DateField('data início', null=True)
-    date_term = models.DateField('data término', null=True)
+    date_ini = models.DateField('data início', default=now)
+    date_term = models.DateField('data término', null=True, blank=True)
     active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
@@ -163,7 +164,7 @@ class Teacher(models.Model):
     area = models.ManyToManyField(Area, verbose_name='área')
     contract_type = models.ForeignKey(ContractType, verbose_name='tipo de contrato')
     phone1 = models.CharField('telefone 1', max_length=14)
-    phone2 = models.CharField('telefone 2', max_length=14, null=True)
+    phone2 = models.CharField('telefone 2', max_length=14, null=True, blank=True)
     email = models.EmailField('e-mail')
     active = models.BooleanField('ativo', default=True)
     efetivo = models.BooleanField(default=True)
@@ -185,7 +186,7 @@ class Activity(models.Model):
     quantity = models.IntegerField('quantidade')
     date_ini = models.DateField('data inicial')
     date_term = models.DateField('data final')
-    observations = models.TextField('observações', null=True)
+    observations = models.TextField('observações', null=True, blank=True)
 
     def __unicode__(self):
         return self.teacher
