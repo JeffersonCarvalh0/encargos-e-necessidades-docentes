@@ -215,6 +215,9 @@ class Semester(models.Model):
     date_ini = models.DateField('data inicial')
     date_term = models.DateField('data final')
 
+    def __unicode__(self):
+        return self.name    
+
     class Meta:
         verbose_name = 'Período'
         verbose_name_plural = 'Períodos'
