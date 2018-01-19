@@ -167,6 +167,7 @@ class Teacher(models.Model):
     email = models.EmailField('e-mail')
     active = models.BooleanField('ativo', default=True)
     efetivo = models.BooleanField(default=True)
+    activity = models.ManyToManyField(Activity, verbose_name='atividade')
 
     def __unicode__(self):
         return self.name
@@ -180,7 +181,7 @@ class Teacher(models.Model):
 # Atividade
 #
 class Activity(models.Model):
-    teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
+    # teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
     act_type = models.ForeignKey(ActivityType, verbose_name='tipo de atividade')
     quantity = models.IntegerField('quantidade')
     date_ini = models.DateField('data inicial')
