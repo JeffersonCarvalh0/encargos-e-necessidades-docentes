@@ -18,7 +18,7 @@ class Campus(models.Model):
     phone1 = models.CharField('telefone 1', max_length=14)
     phone2 = models.CharField('telefone 2', max_length=14, null=True)
     email = models.EmailField('e-mail')
-    site = models.URLField()
+    site = models.URLField('site')
     active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
