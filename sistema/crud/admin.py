@@ -76,7 +76,7 @@ class TeacherAdmin(admin.ModelAdmin):
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
-    ordering = ('name',)
+    ordering = ('date_ini',)
     list_display = ('act_type', 'date_ini', 'date_term',)
 
 @admin.register(Semester)
