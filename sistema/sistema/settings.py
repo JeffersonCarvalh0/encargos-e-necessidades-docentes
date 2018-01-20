@@ -70,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sistema.wsgi.application'
-
+BOOTSTRAP_ADMIN_SIDEBAR_MENU = False
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
