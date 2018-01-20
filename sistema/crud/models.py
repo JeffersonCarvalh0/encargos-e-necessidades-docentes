@@ -19,7 +19,7 @@ class Campus(models.Model):
     phone1 = models.CharField('telefone 1', max_length=14)
     phone2 = models.CharField('telefone 2', max_length=14, null=True)
     email = models.EmailField('e-mail')
-    site = models.URLField()
+    site = models.URLField('site')
     active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
@@ -153,6 +153,23 @@ class ActivityType(models.Model):
         verbose_name = 'Tipo de atividade'
         verbose_name_plural = "Tipos de atividades"
 
+#
+# Atividade
+#
+class Activity(models.Model):
+    # teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
+    act_type = models.ForeignKey(ActivityType, verbose_name='tipo de atividade')
+    quantity = models.IntegerField('quantidade')
+    date_ini = models.DateField('data inicial')
+    date_term = models.DateField('data final')
+    observations = models.TextField('observações', null=True)
+
+    def __unicode__(self):
+        return self.teacher
+
+    class Meta:
+        verbose_name = 'Atividade'
+        verbose_name_plural = "Atividades"
 
 #
 # Professor
@@ -166,8 +183,9 @@ class Teacher(models.Model):
     phone1 = models.CharField('telefone 1', max_length=14)
     phone2 = models.CharField('telefone 2', max_length=14, null=True, blank=True)
     email = models.EmailField('e-mail')
-    active = models.BooleanField('ativo', default=True)
     efetivo = models.BooleanField(default=True)
+    activity = models.ManyToManyField(Activity, verbose_name='atividade', blank=True)
+    active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
         return self.name
@@ -175,25 +193,6 @@ class Teacher(models.Model):
     class Meta:
         verbose_name = 'Professor(a)'
         verbose_name_plural = "Professores"
-
-
-#
-# Atividade
-#
-class Activity(models.Model):
-    teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
-    act_type = models.ForeignKey(ActivityType, verbose_name='tipo de atividade')
-    quantity = models.IntegerField('quantidade')
-    date_ini = models.DateField('data inicial')
-    date_term = models.DateField('data final')
-    observations = models.TextField('observações', null=True, blank=True)
-
-    def __unicode__(self):
-        return self.teacher
-
-    class Meta:
-        verbose_name = 'Atividade'
-        verbose_name_plural = "Atividades"
 
 """
 class User(models.Model):
@@ -215,6 +214,9 @@ class Semester(models.Model):
     name = models.CharField('nome', max_length=50)
     date_ini = models.DateField('data inicial')
     date_term = models.DateField('data final')
+
+    def __unicode__(self):
+        return self.name
 
     class Meta:
         verbose_name = 'Período'
