@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'crud',
+    'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sistema.wsgi.application'
-
+BOOTSTRAP_ADMIN_SIDEBAR_MENU = False
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
