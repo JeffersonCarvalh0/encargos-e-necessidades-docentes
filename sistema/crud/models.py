@@ -11,13 +11,13 @@ class Campus(models.Model):
     name = models.CharField('nome', max_length=50)
     short_name = models.CharField('nome curto', max_length=30)
     add_street = models.CharField('rua', max_length=50)
-    add_no = models.IntegerField('numero')
+    add_no = models.CharField('numero', max_length=10, null = True, blank =True)
     add_neighbor = models.CharField('bairro', max_length=50)
     add_city = models.CharField('cidade', max_length=50)
     add_uf = models.CharField('estado', max_length=2)
     add_zip = models.CharField('CEP', max_length=50)
     phone1 = models.CharField('telefone 1', max_length=14)
-    phone2 = models.CharField('telefone 2', max_length=14, null=True)
+    phone2 = models.CharField('telefone 2', max_length=14, null=True, blank = True)
     email = models.EmailField('e-mail')
     site = models.URLField('site')
     active = models.BooleanField('ativo', default=True)
@@ -159,13 +159,14 @@ class ActivityType(models.Model):
 class Activity(models.Model):
     # teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
     act_type = models.ForeignKey(ActivityType, verbose_name='tipo de atividade')
+    short_name = models.CharField('nome curto', max_length=20)
     quantity = models.IntegerField('quantidade')
     date_ini = models.DateField('data inicial')
     date_term = models.DateField('data final')
     observations = models.TextField('observações', null=True)
 
     def __unicode__(self):
-        return self.teacher
+        return self.short_name
 
     class Meta:
         verbose_name = 'Atividade'
@@ -184,7 +185,7 @@ class Teacher(models.Model):
     phone2 = models.CharField('telefone 2', max_length=14, null=True, blank=True)
     email = models.EmailField('e-mail')
     efetivo = models.BooleanField(default=True)
-    activity = models.ManyToManyField(Activity, verbose_name='atividade', blank=True)
+    activity = models.ManyToManyField(Activity, verbose_name='atividade',blank=True)
     active = models.BooleanField('ativo', default=True)
 
     def __unicode__(self):
@@ -248,7 +249,7 @@ class Enrollment(models.Model):
     teacher = models.ForeignKey(Teacher, verbose_name='professor(a)')
 
     def __unicode__(self):
-        return self.name
+        return unicode(self.offer)
 
     class Meta:
         verbose_name = 'Encargo'
