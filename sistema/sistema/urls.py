@@ -18,10 +18,6 @@ from django.contrib import admin
 from crud import views
 
 urlpatterns = [
-<<<<<<< HEAD
     url(r'', admin.site.urls),
-=======
-    url(r'^admin', admin.site.urls),
->>>>>>> parent of 898ae2d... pequenos concertos
     url(r'^create/campus/', views.create_campus, name='create_campus'),
 ]
