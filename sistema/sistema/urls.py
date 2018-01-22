@@ -19,5 +19,5 @@ from crud import views
 
 urlpatterns = [
     url(r'', admin.site.urls),
-    url(r'^create/campus/', views.create_campus, name='create_campus'),
+    # url(r'^create/campus/', views.create_campus, name='create_campus'),
 ]

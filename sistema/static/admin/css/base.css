@@ -108,8 +108,9 @@ select {
   z-index: 1000;
 }
 .sidebar-menu .django-admin-logo {
-  background: #fffefe;
+  background: #efefef;
   border-bottom: 1px solid #fffefe;
+  border-right: 1px solid #ddd;
   color: #fff;
   display: block;
   height: 86px;
