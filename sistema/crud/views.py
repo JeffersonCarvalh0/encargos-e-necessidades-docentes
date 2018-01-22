@@ -1,19 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.shortcuts import render
 from crud.forms import CampusForm
+from models import Area
 
-def create_campus(request):
-    context = {}
-    if request.method == 'POST':
-        form = CampusForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/')
-    else:
-        form = CampusForm()
+def index(request):
+    area = Area.objects.all()
+    situacao = "ativa"
+    # if Discipline
+    # .objects.active == False:
+    #   situacao = "desativada"
+    return render(request,'list_area.html',{ 'list_area': area })
 
-    context = {'form': form}
+# def create_campus(request):
+#     context = {}
+#     if request.method == 'POST':
+#         form = CampusForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('/')
+#     else:
+#         form = CampusForm()
 
-    return render(request, 'campus/create.html', {'form':form})
+#     context = {'form': form}
+
+#     return render(request, 'campus/create.html', {'form':form})

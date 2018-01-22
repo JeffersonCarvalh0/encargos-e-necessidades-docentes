@@ -1,11 +1,24 @@
-body {
-    padding-top: 120px;
+    body {
+    padding-top: 50px;
+    padding-bottom: 0px;
+    background: #BFC7FF;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    background-color: #2268b2;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 #content-main {
-    background: #272727;
-    border-bottom: 2px solid #444;
-    border-top: 2px solid #444;
-    padding: 20px 0;
+    background: #EEEEEE;    
+    border-bottom: 2px solid #064b94;
+    border-top: 2px solid #064b94;
+    padding: 50px 0px;
 }
 #login-form {
     display: block;
@@ -19,9 +32,9 @@ body {
 }
 #login-form legend {
     border-color: transparent;
-    color: #fff;
+    color: #064b94;
 }
-#login-form .btn {
+#login-form .btn {  
     transition: background .3s ease-in-out;
 }
 .password-reset-link {
@@ -35,7 +48,7 @@ body {
     text-align: left;
 }
 
-@media (max-width: 767px) {
+ @media (max-width: 767px) {
     body {
         padding-top: 60px;
     }

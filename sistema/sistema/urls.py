@@ -18,6 +18,7 @@ from django.contrib import admin
 from crud import views
 
 urlpatterns = [
-    url(r'', admin.site.urls),
-    url(r'^create/campus/', views.create_campus, name='create_campus'),
+    url(r'^admin', admin.site.urls),
+    url(r'', views.index)
+    # url(r'^create/campus/', views.create_campus, name='create_campus'),
 ]
