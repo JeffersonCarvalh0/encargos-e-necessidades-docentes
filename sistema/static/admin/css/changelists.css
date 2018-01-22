@@ -158,15 +158,15 @@
   margin-right: -21px;
 }
 #changelist-filter h2 {
-  background: #333;
-  border-bottom: 2px solid #428bca;
+  background: #07093D;
+  /*border-bottom: 2px solid #428bca;*/
   color: #fff;
   margin: 0;
   padding: 5px;
 }
 #changelist-filter h3 {
-  background: #333333;
-  color: #5bc0de;
+  background: #07093D;
+  color: #fffefe;
   margin: 0 0 5px;
   padding: 5px;
 }
