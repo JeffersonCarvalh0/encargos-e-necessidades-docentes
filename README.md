@@ -77,6 +77,18 @@ caso o script não tenha permissão de execução.
 
 Após isso, basta acessar o endereço http://127.0.0.1:8000/ do navegador de sua preferência, para ter acesso ao site.
 
+Para criar um super usuário, execute o script ```manage.py``` da mesma forma acima, mas agora, passando o argumento
+```createsuperuser```. Siga as instruções para criar o usuário.
+
+Na aplicação, já existem alguns usuários e grupos criados para teste. Os usuários são:
+* UsuarioCoordenador
+* UsuarioDiretor
+* UsuarioRH
+* UsuarioReitor
+* UsuarioSuporte
+
+Cada usuário está em seus respectivos grupos de permissões. A senha para todos eles é a mesma, que é ```admin123```.
+
 ## Desenvolvido com
  * [Django 1.11](https://docs.djangoproject.com/pt-br/1.11/) - Framework para desenvolvimento web usando python
  * [django-admin-bootstrap](https://github.com/douglasmiranda/django-admin-bootstrap) - Tema bootstrap responsivo para a interface de administração do django
