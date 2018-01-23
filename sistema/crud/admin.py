@@ -26,70 +26,85 @@ AdminSite.site_url = None
 
 @admin.register(Campus)
 class CampusAdmin(admin.ModelAdmin):
-    ordering = ('short_name',)
+    ordering = ('short_name', )
     list_display = ('short_name', 'add_city', 'phone1', 'email', 'active', )
+    search_fields = ['name', 'short_name', 'add_city']
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    ordering = ('name',)
+    ordering = ('name', )
     list_display = ('name', 'short_name', 'campus', 'active', )
+    search_fields = ['name', 'short_name', 'campus__name', ]
 
 @admin.register(CourseGrid)
 class CourseGridAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name', 'course', 'date_ini', 'date_term', 'active',)
+    ordering = ('name', )
+    list_display = ('name', 'course', 'date_ini', 'date_term', 'active', )
+    search_fields = ['name', 'course__name']
 
 @admin.register(Area)
 class AreaAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name',)
+    ordering = ('name', )
+    list_display = ('name', )
+    search_fields = ['name', ]
 
 @admin.register(Discipline)
 class DisciplineAdmin(admin.ModelAdmin):
-    ordering = ('short_name',)
-    list_display = ('short_name', 'grid', 'area', 'block', 'work_load',)
+    ordering = ('short_name', )
+    list_display = ('short_name', 'grid', 'area', 'block', 'work_load', )
+    search_fields = ['name', 'short_name', 'area__name', 'block', ]
 
 @admin.register(Title)
 class TitleAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name',)
+    ordering = ('name', )
+    list_display = ('name', )
+    search_fields = ['name', ]
 
 @admin.register(ContractType)
 class ContractTypeAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name', 'wk_teaching', 'wk_resext', 'wk_compl', 'active',)
+    ordering = ('name', )
+    list_display = ('name', 'wk_teaching', 'wk_resext', 'wk_compl', 'active', )
+    search_fields = ['name', ]
 
 @admin.register(ActivityNature)
 class ActivityNatureAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name',)
+    ordering = ('name', )
+    list_display = ('name', )
+    search_fields = ['name', ]
 
 @admin.register(ActivityType)
 class ActivityTypeAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name', 'wk_week', 'wk_limit', 'nature',)
+    ordering = ('name', )
+    list_display = ('name', 'wk_week', 'wk_limit', 'nature', )
+    search_fields = ['name', ]
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name', 'course', 'title', 'efetivo', 'active')
+    ordering = ('name', )
+    list_display = ('name', 'course', 'title', 'efetivo', 'active', )
+    filter_horizontal = ('area','activity', )
+    search_fields = ['name', 'course__name', 'title__name', ]
 
 @admin.register(Activity)
 class ActivityAdmin(admin.ModelAdmin):
-    ordering = ('date_ini',)
-    list_display = ('short_name', 'act_type', 'date_ini', 'date_term',)
+    ordering = ('date_ini', )
+    list_display = ('short_name', 'act_type', 'date_ini', 'date_term', )
+    search_fields = ['short_name', 'act_type__name', ]
 
 @admin.register(Semester)
 class SemesterAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name', 'date_ini', 'date_term',)
+    ordering = ('name', )
+    list_display = ('name', 'date_ini', 'date_term', )
+    search_fields = ['name', ]
 
 @admin.register(Offer)
 class OfferAdmin(admin.ModelAdmin):
-    ordering = ('name',)
-    list_display = ('name', 'semester', 'course', 'date_ini', 'date_term',)
+    ordering = ('name', )
+    list_display = ('name', 'semester', 'course', 'date_ini', 'date_term', )
+    search_fields = ['name', 'course__name']
 
 @admin.register(Enrollment)
 class EnrollmentAdmin(admin.ModelAdmin):
-    ordering = ('offer',)
-    list_display = ('offer', 'discipline', 'teacher',)
+    ordering = ('offer', )
+    list_display = ('offer', 'discipline', 'teacher', )
+    search_fields = ['discipline__name', 'teacher__name']
